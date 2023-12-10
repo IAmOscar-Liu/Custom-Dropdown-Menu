@@ -1,6 +1,24 @@
 .container {
+  border: 1px solid black;
+  border-radius: 3;
   cursor: pointer;
   position: relative;
+}
+
+.container:has(input[type="checkbox"]:focus) {
+  border: 2px solid rgb(46, 46, 255) !important;
+}
+
+.container:has(input[type="checkbox"]:checked) .optionlist {
+  display: block;
+}
+
+.hiddenCheckbox {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 100;
 }
 
 .box {
@@ -22,7 +40,17 @@
   transform: rotate(90deg) scaleX(0.6);
 }
 
+.box .valueItem {
+  padding-block: 2px;
+  padding-inline: 6px;
+}
+
+.box .valueItem.placeholder {
+  color: gray;
+}
+
 .optionlist {
+  display: none;
   position: absolute;
   inset: 100% 0 auto 0;
   border: 1px solid black;
@@ -34,4 +62,18 @@
   list-style: none;
   margin: 0;
   padding: 0;
+}
+
+.optionlist ul .item {
+  padding-block: 2px;
+  padding-inline: 6px;
+}
+
+.optionlist ul .item.selected {
+  background: blue;
+  color: white;
+}
+
+.optionlist ul .item.active {
+  background: gray;
 }
