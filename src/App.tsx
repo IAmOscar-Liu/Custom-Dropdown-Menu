@@ -7,6 +7,11 @@ type Country = {
   name: string;
 };
 
+type Student = {
+  id: string;
+  name: string;
+};
+
 const DROPDOWN_OPTIONS: Country[] = [
   { id: "TW", name: "Taiwan" },
   { id: "CN", name: "China" },
@@ -14,8 +19,16 @@ const DROPDOWN_OPTIONS: Country[] = [
   { id: "JP", name: "Japan" },
 ];
 
+const DROPDOWN_OPTIONS_STUDENT: Country[] = [
+  { id: "1", name: "Oscar" },
+  { id: "2", name: "John" },
+  { id: "3", name: "Amy" },
+  { id: "4", name: "Eric" },
+];
+
 export default function App() {
   const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
+  const [selectedStudent, setSelectedStudent] = useState<Student | null>(null);
 
   return (
     <div className="App">
@@ -28,32 +41,46 @@ export default function App() {
         optionTemplate={({ value, isActive, isSelected }) => (
           <div
             style={{
+              paddingBlock: 3,
               paddingInline: 6,
               display: "flex",
               justifyContent: "space-between",
+              alignItems: "center",
               background: isSelected ? "blue" : isActive ? "gray" : "inherit",
+              color: isSelected ? "white" : "inherit",
             }}
           >
-            <span>{value.name}</span>
-            <span>{value.id}</span>
+            <b>{value.name}</b>
+            <small>{value.id}</small>
           </div>
         )}
         valueTemplate={({ value }) =>
           value ? (
             <div
               style={{
+                paddingBlock: 3,
                 paddingInline: 6,
                 display: "flex",
                 justifyContent: "space-between",
+                alignItems: "center",
               }}
             >
-              <span>{value.name}</span>
-              <span>{value.id}</span>
+              <b>{value.name}</b>
+              <small>{value.id}</small>
             </div>
           ) : (
-            <div style={{ paddingInline: 6 }}>Select your country</div>
+            <div style={{ paddingBlock: 3, paddingInline: 6, color: "gray" }}>
+              Select your country
+            </div>
           )
         }
+      />
+      <div style={{ width: 20 }}></div>
+      <CustomDropdown
+        width={300}
+        options={DROPDOWN_OPTIONS_STUDENT}
+        value={selectedStudent}
+        onChange={setSelectedStudent}
       />
     </div>
   );
